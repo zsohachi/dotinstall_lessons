@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Chart Tools</title>
+</head>
+<body>
+  <div id="target"></div>
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+  <script>
+    // (function() {
+    //   'use strict';
+
+    //   function drawChart() {
+        // var target = document.getElementById('target');
+        // // グラフのデータを格納する変数
+        // var data;
+
+        // // 描画のためのオプション
+        // var options = {
+        //     title: 'My Chart',
+        //     width: 500,
+        //     height: 300,
+
+            // 円グラフ
+            // backgroundColor: '#f8f8f8',
+            // colors: ['red', 'yellow', 'green'],
+            // slices: [1,{offset: 0.2}],
+            // // pieHole: 0.4,
+            // is3D: true,
+            // // pieHoleとis3Dは同時に使えない
+
+            // // 棒グラフ
+            // animation: {
+            //     startup: true,
+            //     duration: 800, //ミリ秒
+            //     easing: 'inAndOut',
+            // },
+            // // isStacked: true,
+            // isStacked: 'percent',
+
+            // // 折れ線グラフ
+            // hAxis: {title: 'Year'},
+            // vAxis: {title: 'Sales'},
+            // curveType: 'function', //カーブをゆるやかに
+            // pointSize: 10, // ポイントを大きくする
+            // pointShape: 'square', // データポイントの形
+
+            // };
+
+
+        // 円グラフを描画
+        // Piechart()には描画領域を渡す  
+        // var chart = new google.visualization.PieChart(target);
+        
+        // // 空のデータテーブルを用意
+        // data = new google.visualization.DataTable();
+        
+        // // 列を設定
+        // // データ型と列の名前を指定
+        // data.addColumn('string', 'Language');
+        // data.addColumn('number', 'Votes');
+        
+        // // 行データの指定
+        // // 配列で指定するdata.addRow(['PHP', 30]);
+        // data.addRow(['PHP', 30]);
+        // data.addRow(['Ruby', 20]);
+        // data.addRow(['Python', 10]);
+
+
+        // // 配列で一気に追加する方法
+        // data = new google.visualization.arrayToDataTable([
+        //     ['Language', 'Votes'],
+        //     ['PHP', 100],
+        //     ['Ruby', 20],
+        //     ['Python', 10],
+        // ]);
+
+
+
+
+        // 棒グラフを描画
+        // 横棒グラフ
+        // var chart = new google.visualization.BarChart(target);
+        // 縦棒グラフ
+        // var chart = new google.visualization.ColumnChart(target);
+
+        // data = new google.visualization.arrayToDataTable([
+        //     ['Team', 'Item-1', 'Item-2'],
+        //     ['Team A', 12, 38],
+        //     ['Team B', 42, 18],
+        //     ['Team C', 11, 58],
+        // ]);
+
+
+
+        // 折れ線グラフを描画
+        // var chart = new google.visualization.LineChart(target);
+        // data = new google.visualization.arrayToDataTable([
+        //     // {role: 'annotation'} でデータにコメントをつける
+        //     // {role: 'certainty'}で破線にする　予想のような見せ方
+        //     ['Year', '@taguchi', {role: 'annotation'}, {role: 'certainty'}, '@fkoji', {role: 'certainty'}],
+        //     ['2014', 52, 'Campaign A', true, 89, true],
+        //     ['2015', 38, null, true, 78, true],
+        //     ['2016', 44, null, true, 88, true],
+        //     ['2017', 62, null, false, 91, false],
+        // ]);
+        
+
+    //     // chartのdrawメソッドにdataとoptionsを渡す
+    //     chart.draw(data, options);
+    //   }
+
+
+
+    //     // 描画に必要なライブラリの読み込み
+    //     // ライブラリのバージョンなどを指定
+    //     // 'current' としてあげると最新版を読み込んでくれます。
+    //     // 基本的なチャートが入っている corechart というパッケージを読み込みgoogle.charts.load('current', {packages: ['corechart']});
+    //     google.charts.load('current', {packages: ['corechart']});
+    //     google.charts.setOnLoadCallback(drawChart);
+    // })();
+
+
+
+    // // スプレッドシートと連動
+    // (function() {
+    //   'use strict';
+
+    //   function drawChart() {
+    //     // スプレッドシートへの問い合わせ
+    //     var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1-pGAhnklKIOAnNQ48V6S1BjeuyG7PPDXC2vQYMHV5m4/edit?usp=sharing');
+    //     // query に対して send メソッドを実行して、どのような処理をしたいかを関数で渡す
+    //     query.send(handleQueryResponse);
+    //   }
+
+    // // sendメソッドに渡す関数
+    // function handleQueryResponse(response){
+    //     // 描画処理を関数にまとめる
+    //     var target = document.getElementById('target');
+    //     var data;
+    //     var options = {
+    //         title: 'My Chart',
+    //         width: 500,
+    //         height: 300,
+    //     };
+
+    //     var chart = new.google.visualization.PieChart(target);
+    //     data = response.getDataTable();
+    //     chart.draw(data, options);
+    // }
+
+
+    // google.charts.load('current', {packages: ['corechart']});
+    // google.charts.setOnLoadCallback(drawChart);
+    
+    // })();
+
+
+    (function() {
+      'use strict';
+
+      function drawChart() {
+        var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1-pGAhnklKIOAnNQ48V6S1BjeuyG7PPDXC2vQYMHV5m4/edit?usp=sharing');
+        query.send(handleQueryResponse);
+      }
+
+      function handleQueryResponse(response) {
+        var target = document.getElementById('target');
+        var data;
+        var options = {
+          title: 'My Chart',
+          width: 500,
+          height: 300
+        };
+        var chart = new google.visualization.PieChart(target);
+        data = response.getDataTable();
+        chart.draw(data, options);
+      }
+
+      google.charts.load('current', {packages: ['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+    })();
+
+  </script>
+</body>
+</html>
